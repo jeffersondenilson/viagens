@@ -1,0 +1,40 @@
+{
+  "name": "viagens",
+  "version": "1.0.0",
+  "description": "App que calcula distância entre cidades e simula compra de passagem",
+  "main": "server/index.js",
+  "engines": {
+    "node": "14.x"
+  },
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemon server",
+    "build": "cd client/ && yarn install && yarn build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcryptjs": "2.4.3",
+    "cors": "2.8.5",
+    "dotenv": "10.0.0",
+    "express": "4.17.1",
+    "jsonwebtoken": "8.5.1",
+    "mongoose": "5.13.5",
+    "passport": "0.4.1",
+    "passport-jwt": "4.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "2.0.12",
+    "prettier": "2.3.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeffersondenilson/viagens.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jeffersondenilson/viagens/issues"
+  },
+  "homepage": "https://github.com/jeffersondenilson/viagens#readme"
+}
