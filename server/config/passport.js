@@ -1,7 +1,7 @@
 const passportJwt = require("passport-jwt");
 const { Strategy, ExtractJwt } = passportJwt;
 
-// database
+const User = require("../models/user");
 
 module.exports = (passport) => {
   const opts = {
@@ -11,8 +11,7 @@ module.exports = (passport) => {
 
   const strategy = new Strategy(opts, async (payload, done) => {
     try {
-      // search user on database
-      // const user = await User.findByPk(payload.id);
+      const user = await User.findById(payload.id).exec();
 
       if (user) {
         done(null, { ...payload });

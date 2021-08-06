@@ -6,29 +6,38 @@ const User = require("../models/user");
 module.exports = {
   async create(req, res) {
     try {
-      let user = {
+      // const user = {
+      //   name: req.body.name,
+      //   email: req.body.email,
+      //   password: req.body.password,
+      // };
+      const user = new User({
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
-      };
+      });
 
-      // TODO: validar
+      const error = await user.validate();
+      if (error) {
+        return res.status(400).send({
+          error: error.errors,
+          status: 400,
+        });
+      }
 
       user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
 
-      const emailExists = await User.findOne({
-        where: { email: user.email },
-      });
+      /*const emailExists = await User.findOne({ email: user.email }).exec();
       if (emailExists) {
         return res.status(400).send({
           error: "Email já existe",
           status: 400,
         });
-      }
+      }*/
 
-      await User.create(user);
+      await user.save();
 
-      res.status(201).send();
+      res.status(201).send("Conta criada, vá para login");
     } catch (e) {
       console.error(e);
       res.status(500).send({ error: "ERROR", status: 500 });
@@ -37,11 +46,8 @@ module.exports = {
 
   async login(req, res) {
     try {
-      const { email = "", password = "" } = req.body;
-
-      const user = await User.scope("withPassword").findOne({
-        where: { email },
-      });
+      // const { email = "", password = "" } = req.body;
+      const user = User.findOne({ email: req.body.email });
 
       if (!user) {
         return res.status(400).send({
@@ -53,7 +59,7 @@ module.exports = {
       const isMatch = bcrypt.compareSync(req.body.password, user.password);
       if (!isMatch) {
         return res.status(401).send({
-          error: "Email/Senha inválidos",
+          error: "Email/Senha não conferem",
           status: 401,
         });
       }
@@ -64,7 +70,6 @@ module.exports = {
         id: user.id,
         name: user.name,
         email: user.email,
-        role: user.role,
         iat: now,
         exp: now + 60 * 60 * 24 * 3, // 3 dias
       };
@@ -81,7 +86,7 @@ module.exports = {
   async validateToken(req, res) {
     try {
       let user = jwt.verify(req.body.token, process.env.AUTH_SECRET);
-      user = await User.findByPk(user.id);
+      // user = await User.findById(user.id, { id: 1, name: 1, email: 1 }).exec();
       res.status(200).send(user);
     } catch (e) {
       console.error(e);
