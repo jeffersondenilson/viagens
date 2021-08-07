@@ -9,3 +9,5 @@ router.post("/auth/signin", auth.signin);
 router.post("/auth/validatetoken", auth.validateToken);
 
 // router.use(passport.authenticate("jwt", { session: false }));
+
+module.exports = router;

@@ -9,13 +9,6 @@ const UserSchema = new Schema({
   email: {
     type: String,
     unique: true,
-    validate: {
-      validator: async () => {
-        const emailExists = await this.findOne({ email: this.email });
-        return !emailExists;
-      },
-      message: "Email já existe",
-    },
     required: [true, "Email não informado"],
   },
   password: {

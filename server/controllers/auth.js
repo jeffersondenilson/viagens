@@ -4,50 +4,48 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
 module.exports = {
-  async create(req, res) {
+  async signup(req, res) {
     try {
-      // const user = {
-      //   name: req.body.name,
-      //   email: req.body.email,
-      //   password: req.body.password,
-      // };
       const user = new User({
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
       });
 
-      const error = await user.validate();
+      const error = await user.validate().catch((e) => e);
       if (error) {
+        const errors = Object.keys(error.errors).map((field) => {
+          return { field, message: error.errors[field].message };
+        });
+
         return res.status(400).send({
-          error: error.errors,
+          errors,
+          status: 400,
+        });
+      }
+
+      const emailExists = await User.findOne({ email: user.email }).exec();
+      if (emailExists) {
+        return res.status(400).send({
+          errors: [{ field: "email", message: "Email já existe" }],
           status: 400,
         });
       }
 
       user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
 
-      /*const emailExists = await User.findOne({ email: user.email }).exec();
-      if (emailExists) {
-        return res.status(400).send({
-          error: "Email já existe",
-          status: 400,
-        });
-      }*/
-
       await user.save();
 
-      res.status(201).send("Conta criada, vá para login");
+      res.status(201).send("Conta criada, vá para signin");
     } catch (e) {
       console.error(e);
       res.status(500).send({ error: "ERROR", status: 500 });
     }
   },
 
-  async login(req, res) {
+  async signin(req, res) {
     try {
-      // const { email = "", password = "" } = req.body;
-      const user = User.findOne({ email: req.body.email });
+      const user = await User.findOne({ email: req.body.email }).exec();
 
       if (!user) {
         return res.status(400).send({
@@ -67,7 +65,7 @@ module.exports = {
       const now = Math.floor(Date.now() / 1000); // data em segundos
 
       const payload = {
-        id: user.id,
+        id: user._id,
         name: user.name,
         email: user.email,
         iat: now,
@@ -85,8 +83,7 @@ module.exports = {
 
   async validateToken(req, res) {
     try {
-      let user = jwt.verify(req.body.token, process.env.AUTH_SECRET);
-      // user = await User.findById(user.id, { id: 1, name: 1, email: 1 }).exec();
+      const user = jwt.verify(req.body.token, process.env.AUTH_SECRET);
       res.status(200).send(user);
     } catch (e) {
       console.error(e);
