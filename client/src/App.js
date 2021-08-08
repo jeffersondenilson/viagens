@@ -1,7 +1,8 @@
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 import Home from "./pages/Home";
+import Cities from "./pages/Cities";
 import { AuthContextProvider } from "./contexts/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -14,6 +15,12 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Home />
+          </Route>
+          <PrivateRoute exact path="/cidades">
+            <Cities />
+          </PrivateRoute>
+          <Route path="*">
+            <Redirect to="/" />
           </Route>
         </Switch>
 

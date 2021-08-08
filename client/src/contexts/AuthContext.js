@@ -39,7 +39,7 @@ export function AuthContextProvider(props) {
       const { from } = location.state || { from: { pathname: "/cidades" } };
       history.replace(from);
     } catch (err) {
-      toast.error(response.data.error || "Erro ao fazer login");
+      toast.error(err.response.data.error || "Erro ao fazer login");
     }
   };
 
@@ -49,12 +49,13 @@ export function AuthContextProvider(props) {
       login({ email, password });
     } catch (err) {
       // erros de formulário ao criar conta (TEMPORÁRIO)
-      if (response.data.errors) {
-        response.data.errors.each((e) => {
+      const res = err.response;
+      if (res.data.errors) {
+        res.data.errors.forEach((e) => {
           toast.error(e.message);
         });
       } else {
-        toast.error(response.data.error || "Erro ao criar conta");
+        toast.error(res.data.error || "Erro ao criar conta");
       }
     }
   };
