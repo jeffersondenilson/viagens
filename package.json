@@ -6,6 +6,10 @@
   "engines": {
     "node": "14.x"
   },
+  "cacheDirectories": [
+    "node_modules",
+    "client/node_modules"
+  ],
   "scripts": {
     "start": "node server",
     "dev": "nodemon server",
