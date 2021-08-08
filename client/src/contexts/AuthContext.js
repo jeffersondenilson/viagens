@@ -1,5 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+
 import httpClient from "../services";
 
 export const AuthContext = createContext({});
@@ -37,7 +39,7 @@ export function AuthContextProvider(props) {
       const { from } = location.state || { from: { pathname: "/cidades" } };
       history.replace(from);
     } catch (err) {
-      // TODO: handle error
+      toast.error(response.data.error || "Erro ao fazer login");
     }
   };
 
@@ -46,16 +48,14 @@ export function AuthContextProvider(props) {
       await httpClient.post("/auth/signup", { name, email, password });
       login({ email, password });
     } catch (err) {
-      // TODO: handle error
-      /*
-      if (response.data && response.data.error) {
-        errors = {
-          status: response.request.status,
-          statusText: response.request.statusText,
-          message: response.data.error,
-        };
+      // erros de formulário ao criar conta (TEMPORÁRIO)
+      if (response.data.errors) {
+        response.data.errors.each((e) => {
+          toast.error(e.message);
+        });
+      } else {
+        toast.error(response.data.error || "Erro ao criar conta");
       }
-      */
     }
   };
 
