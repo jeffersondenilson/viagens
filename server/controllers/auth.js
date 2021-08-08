@@ -86,7 +86,6 @@ module.exports = {
       const user = jwt.verify(req.body.token, process.env.AUTH_SECRET);
       res.status(200).send(user);
     } catch (e) {
-      console.error(e);
       res.status(401).send({
         error: "Token inválido",
         status: 401,
