@@ -2,7 +2,7 @@ import { createContext, useState, useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import httpClient from "../services";
+import { httpClient } from "../services";
 
 export const AuthContext = createContext({});
 

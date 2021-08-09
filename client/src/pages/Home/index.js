@@ -21,10 +21,10 @@ export default function Home() {
           <div className="container">
             <div className="columns">
               <div className="column">
-                <p className="title">Viagens</p>
-                <p className="subtitle">
+                <h1 className="title">Viagens</h1>
+                <h2 className="subtitle">
                   Escolha uma cidade, veja a distância e o preço da viagem
-                </p>
+                </h2>
               </div>
               <div className="column">
                 <SignForm />
