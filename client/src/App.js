@@ -3,6 +3,7 @@ import { ToastContainer } from "react-toastify";
 
 import Home from "./pages/Home";
 import Destinations from "./pages/Destinations";
+import Travel from "./pages/Travel";
 import { AuthContextProvider } from "./contexts/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -18,6 +19,9 @@ function App() {
           </Route>
           <PrivateRoute exact path="/destinos">
             <Destinations />
+          </PrivateRoute>
+          <PrivateRoute exact path="/viagem*">
+            <Travel />
           </PrivateRoute>
           <Route path="*">
             <Redirect to="/" />

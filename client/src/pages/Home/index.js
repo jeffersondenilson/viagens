@@ -1,18 +1,21 @@
 import { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 import { useAuth } from "../../hooks/useAuth";
 import SignForm from "./SignForm";
 
 export default function Home() {
   const history = useHistory();
+  const location = useLocation();
   const { user } = useAuth();
 
   useEffect(() => {
     if (user) {
-      history.push("/cidades");
+      const { from } = location.state || { from: { pathname: "/destinos" } };
+      history.push(from);
+      // history.push("/destinos");
     }
-  }, [history, user]);
+  }, [history, user, location.state]);
 
   return (
     <div>

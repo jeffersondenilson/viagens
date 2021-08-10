@@ -1,7 +1,7 @@
 const Destination = require("../models/destination");
 
 module.exports = {
-  async readAll() {
+  async readAll(req, res) {
     try {
       const destinations = await Destination.find({}).exec();
       res.status(200).send(destinations);

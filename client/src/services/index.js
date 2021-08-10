@@ -14,8 +14,4 @@ httpClient.interceptors.request.use((config) => {
   return config;
 });
 
-const services = {
-  httpClient
-}
-
-export services;
+export { httpClient };

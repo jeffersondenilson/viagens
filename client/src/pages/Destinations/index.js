@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { httpClient } from "../services";
+import { httpClient } from "../../services";
+import CitiesLinks from "./CitiesLinks";
 
 export default function Destinations() {
   const [destinations, setDestinations] = useState([]);
@@ -20,7 +20,7 @@ export default function Destinations() {
 
   return (
     <div>
-      <section className="hero is-info is-fullheight">
+      <section className="hero is-info">
         <div className="hero-body">
           <div className="container">
             <h1 className="title">Destinos</h1>
@@ -28,7 +28,14 @@ export default function Destinations() {
           </div>
         </div>
       </section>
-      <section>{/*renderizar cidades*/}</section>
+      <section className="container mt-3 px-6 pb-6">
+        {/*<section className="is-flex is-flex-direction-column">*/}
+        {destinations.map((dest) => {
+          return <CitiesLinks key={dest._id} destination={dest} />;
+        })}
+
+        {/*TODO: link para procurar outras cidades*/}
+      </section>
     </div>
   );
 }

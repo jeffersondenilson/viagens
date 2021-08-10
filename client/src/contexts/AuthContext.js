@@ -36,7 +36,7 @@ export function AuthContextProvider(props) {
       localStorage.setItem("token", res.data.token);
       setUser(res.data);
 
-      const { from } = location.state || { from: { pathname: "/cidades" } };
+      const { from } = location.state || { from: { pathname: "/destinos" } };
       history.replace(from);
     } catch (err) {
       toast.error(err.response.data.error || "Erro ao fazer login");
