@@ -6,14 +6,14 @@ export default function CitiesLinks({ destination }) {
       <h3 className="is-size-4">{destination.state}</h3>
       <ul>
         {destination.cities.map((city) => {
-          const cityParam = `${city},${destination.state}`; //encodeURI(`${city},${destination.state}`);
+          // const cityParam = `${city},${destination.state}`; //encodeURI(`${city},${destination.state}`);
 
           return (
             <li className="py-1" key={`${city}-${destination.state}`}>
               <Link
                 to={{
-                  pathname: `/viagem?city=${cityParam}`,
-                  state: { city: `${city},${destination.state}` },
+                  pathname: `/viagem?city=${city},${destination.state}`,
+                  state: { city: `${city}, ${destination.state}, Brasil` },
                 }}
               >
                 {city}
