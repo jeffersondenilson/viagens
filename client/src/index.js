@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import "leaflet/dist/leaflet.css";
 import "bulma/css/bulma.min.css";
 import "./index.css";
-import "leaflet/dist/leaflet.css";
 import App from "./App";
 
 ReactDOM.render(

@@ -7,24 +7,23 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav
-      className="navbar has-shadow is-fixed-top"
-      role="navigation"
-      aria-label="main navigation"
-    >
+    <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         {/* logo */}
         <Link className="navbar-item" to="/destinos">
           <img
-            src="https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo2.png"
-            width="112"
-            height="28"
+            src="https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo1.png"
+            width="132"
+            height="48"
             alt="logo"
           />
         </Link>
         {/* burger */}
         <button
-          className={`navbar-burger ${isMenuOpen ? "is-active" : ""}`}
+          className={`navbar-burger has-background-light mt-2 mr-2 mb-2 ${
+            isMenuOpen ? "is-active" : ""
+          }`}
+          style={{ borderRadius: "999px" }}
           aria-label="menu"
           aria-expanded={isMenuOpen}
           data-target="navbar"

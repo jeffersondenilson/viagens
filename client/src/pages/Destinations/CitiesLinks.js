@@ -13,7 +13,7 @@ export default function CitiesLinks({ destination }) {
               <Link
                 to={{
                   pathname: `/viagem?city=${city},${destination.state}`,
-                  state: { city: `${city}, ${destination.state}, Brasil` },
+                  state: { city: `${city}, ${destination.state}` },
                 }}
               >
                 {city}
