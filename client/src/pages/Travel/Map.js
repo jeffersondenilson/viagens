@@ -1,4 +1,10 @@
-import { MapContainer, TileLayer, Marker, Tooltip } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Tooltip,
+  Polyline,
+} from "react-leaflet";
 import { Icon } from "leaflet";
 import marker from "../../images/marker-icon.png";
 
@@ -8,19 +14,38 @@ const MarkerIcon = new Icon({
   iconAnchor: [12, 41],
 });
 
-const originPosition = [-5.8054, -35.2081];
-const destinationPosition = [-8.05428, -34.8813];
+/*const origin.position = [-5.8054, -35.2081];
+const destination.position = [-8.05428, -34.8813];
 
 const center = [
-  (originPosition[0] + destinationPosition[0]) / 2,
-  (originPosition[1] + destinationPosition[1]) / 2,
-];
+  (origin.position[0] + destination.position[0]) / 2,
+  (origin.position[1] + destination.position[1]) / 2,
+];*/
 
-export default function Map() {
+function getZoomLevel(dist) {
+  if (dist <= 200) {
+    return 10;
+  } else if (dist > 200 && dist <= 800) {
+    return 7;
+  } else if (dist > 800 && dist <= 1000) {
+    return 5;
+  } else {
+    return 3;
+  }
+}
+
+export default function Map({ origin, destination, distance }) {
+  const center = [
+    (origin.position[0] + destination.position[0]) / 2,
+    (origin.position[1] + destination.position[1]) / 2,
+  ];
+
+  const zoom = getZoomLevel(distance);
+
   return (
     <MapContainer
       center={center}
-      zoom={7}
+      zoom={zoom}
       placeholder={<div>Carregando mapa...</div>}
       scrollWheelZoom={false}
     >
@@ -30,21 +55,20 @@ export default function Map() {
         tileSize={512}
         zoomOffset={-1}
       />
-      <Marker position={originPosition} icon={MarkerIcon}>
+      <Polyline
+        pathOptions={{ color: "red" }}
+        positions={[origin.position, destination.position]}
+      />
+      <Marker position={origin.position} icon={MarkerIcon}>
         <Tooltip direction="top" offset={[0, -40]} opacity={1} permanent>
-          Natal
+          {origin.cityName}
         </Tooltip>
       </Marker>
-      <Marker position={destinationPosition} icon={MarkerIcon}>
+      <Marker position={destination.position} icon={MarkerIcon}>
         <Tooltip direction="top" offset={[0, -40]} opacity={1} permanent>
-          Recife
+          {destination.cityName}
         </Tooltip>
       </Marker>
     </MapContainer>
   );
 }
-
-/*
-const center = [-13.752, -52.553]
-const zoom = 5
-*/

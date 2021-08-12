@@ -66,6 +66,17 @@ export function AuthContextProvider(props) {
     history.push("/");
   };
 
+  const setUserLocation = () => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setUser({
+          ...user,
+          location: [position.coords.latitude, position.coords.longitude],
+        });
+      });
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -73,6 +84,7 @@ export function AuthContextProvider(props) {
         login,
         createAccount,
         logout,
+        setUserLocation,
       }}
     >
       {props.children}

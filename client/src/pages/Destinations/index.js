@@ -3,12 +3,15 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { httpClient } from "../../services";
+import { useAuth } from "../../hooks/useAuth";
 import Navbar from "../../components/Navbar";
 import CitiesLinks from "./CitiesLinks";
 
 export default function Destinations() {
+  const { setUserLocation } = useAuth();
   const [destinations, setDestinations] = useState([]);
 
+  // carrega lista de cidades da api
   useEffect(() => {
     httpClient
       .get("/destinations")
@@ -19,6 +22,11 @@ export default function Destinations() {
         toast.error("Erro ao carregar destinos");
       });
   }, []);
+
+  // pega localização do browser
+  useEffect(() => {
+    setUserLocation();
+  }, [setUserLocation]);
 
   return (
     <div>

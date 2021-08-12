@@ -28,8 +28,10 @@ html {
 #map {
   height: 400px;
   /*margin: 6rem 1.5rem 1rem 0;*/
-  margin-top: 6rem;
+  /*margin-top: 6rem;*/
   /*margin-right: 1.5rem;*/
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -40,8 +42,7 @@ html {
 
 @media screen and (min-width: 1024px) {
   #map {
-    margin-top: 1rem;
-    margin-left: 1rem;
+    margin-left: 2rem;
     width: 600px;
     height: 500px;
   }
