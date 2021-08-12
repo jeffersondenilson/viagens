@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { httpClient } from "../../services";
@@ -52,7 +52,6 @@ export default function Travel() {
   // busca localização do usuario
   useEffect(() => {
     if (user.location) {
-      console.log("get location", user.location);
       const locationParam = encodeURIComponent(
         [...user.location].reverse().join(",")
       );
@@ -102,26 +101,34 @@ export default function Travel() {
   }, [origin.center, destination.center]);
 
   return (
-    <div>
-      <section className="hero is-info">
+    <div id="map-page-grid">
+      <section className="hero is-info header">
         <div className="hero-head">
           <Navbar />
         </div>
       </section>
-      <section>
-        <div>
+      <section className="section travel-info">
+        <div className="subtitle is-size-5">
           <p>
-            <b>De: </b> {origin.cityName} <b>Até: </b> {destination.cityName}
+            <b>De: </b> {origin.place_name}
+          </p>
+          <p>
+            <b>Até: </b> {destination.place_name}
           </p>
           <p>
             <b>Distância: </b> {distance} km
           </p>
           <p>
-            <b>Preço: </b> {distance} km x R$ 1,50 = R$ {distance * 1.5}
+            <b>Preço: </b> R$ {distance * 1.5}
           </p>
         </div>
+        <div>
+          <Link to="/destinos" className="is-size-5 is-underlined">
+            Voltar aos destinos
+          </Link>
+        </div>
       </section>
-      <section>
+      <section className="map-section">
         <div id="map">
           {distance > 0 && (
             <Map
