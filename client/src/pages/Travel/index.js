@@ -52,7 +52,7 @@ export default function Travel() {
   // busca localização do usuario
   useEffect(() => {
     if (user.location) {
-      console.log("location");
+      console.log("get location", user.location);
       const locationParam = encodeURIComponent(
         [...user.location].reverse().join(",")
       );
@@ -111,16 +111,13 @@ export default function Travel() {
       <section>
         <div>
           <p>
-            <b>De: </b> {origin.cityName}
+            <b>De: </b> {origin.cityName} <b>Até: </b> {destination.cityName}
           </p>
           <p>
-            <b>Até: </b> {destination.cityName}
+            <b>Distância: </b> {distance} km
           </p>
           <p>
-            <b>Distância: </b> {distance}
-          </p>
-          <p>
-            <b>Preço: </b> {distance} x R$ 1,50 = R$ {distance * 1.5}
+            <b>Preço: </b> {distance} km x R$ 1,50 = R$ {distance * 1.5}
           </p>
         </div>
       </section>

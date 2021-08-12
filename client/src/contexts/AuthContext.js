@@ -17,7 +17,11 @@ export function AuthContextProvider(props) {
       httpClient
         .post("/auth/validatetoken", { token })
         .then((res) => {
-          setUser(res.data);
+          if (user && user.location) {
+            setUser({ ...res.data, location: user.location });
+          } else {
+            setUser(res.data);
+          }
         })
         .catch((err) => {
           if (err.request.status === 401) {

@@ -14,38 +14,15 @@ const MarkerIcon = new Icon({
   iconAnchor: [12, 41],
 });
 
-/*const origin.position = [-5.8054, -35.2081];
-const destination.position = [-8.05428, -34.8813];
-
-const center = [
-  (origin.position[0] + destination.position[0]) / 2,
-  (origin.position[1] + destination.position[1]) / 2,
-];*/
-
-function getZoomLevel(dist) {
-  if (dist <= 200) {
-    return 10;
-  } else if (dist > 200 && dist <= 800) {
-    return 7;
-  } else if (dist > 800 && dist <= 1000) {
-    return 5;
-  } else {
-    return 3;
-  }
-}
-
 export default function Map({ origin, destination, distance }) {
-  const center = [
-    (origin.position[0] + destination.position[0]) / 2,
-    (origin.position[1] + destination.position[1]) / 2,
+  const bounds = [
+    [origin.position[0] + 2, origin.position[1] + 2],
+    [destination.position[0] - 2, destination.position[1] - 2],
   ];
-
-  const zoom = getZoomLevel(distance);
 
   return (
     <MapContainer
-      center={center}
-      zoom={zoom}
+      bounds={bounds}
       placeholder={<div>Carregando mapa...</div>}
       scrollWheelZoom={false}
     >
@@ -72,3 +49,17 @@ export default function Map({ origin, destination, distance }) {
     </MapContainer>
   );
 }
+
+/*function getZoomLevel(dist) {
+  if (dist <= 100) {
+    return 9;
+  } else if (dist > 100 && dist <= 300) {
+    return 7;
+  } else if (dist > 300 && dist <= 500) {
+    return 6;
+  } else if (dist > 500 && dist <= 1000) {
+    return 5;
+  } else {
+    return 3;
+  }
+}*/
