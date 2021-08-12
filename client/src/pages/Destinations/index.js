@@ -38,9 +38,9 @@ export default function Destinations() {
           return <CitiesLinks key={dest._id} destination={dest} />;
         })}
 
-        <Link to="/viagem" className="is-size-4 is-underlined">
+        {/*<Link to="/viagem" className="is-size-4 is-underlined">
           Buscar outra cidade
-        </Link>
+        </Link>*/}
       </section>
     </div>
   );

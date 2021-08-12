@@ -1,19 +1,19 @@
-/*import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { toast } from "react-toastify";*/
+import { toast } from "react-toastify";
 
-// import { httpClient } from "../../services";
+import { httpClient } from "../../services";
 import Navbar from "../../components/Navbar";
 import Map from "./Map";
 
 export default function Travel() {
-  /*
   const location = useLocation();
   // TODO: acessar localização do browser
   const [origin, setOrigin] = useState();
   const [destination, setDestination] = useState();
 
   // busca cidade quando montar
+  /*
   useEffect(() => {
     const { city } = location.state || { city: null };
 
@@ -35,8 +35,9 @@ export default function Travel() {
     }
   }, []);
   */
+
   return (
-    <div id="map-page-grid">
+    <div>
       <section className="hero is-info">
         <div className="hero-head">
           <Navbar />
@@ -46,6 +47,14 @@ export default function Travel() {
         <div id="map">
           <Map />
         </div>
+
+        <button
+          className="button is-info is-rounded is-small scroll-to-top-button"
+          onClick={() => window.scrollTo(0, 0)}
+          style={{ fontSize: "1rem", borderRadius: "999px", padding: ".8rem" }}
+        >
+          &#8657;
+        </button>
       </section>
     </div>
   );
