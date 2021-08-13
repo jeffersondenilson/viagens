@@ -14,7 +14,6 @@ https://viagens-28117.herokuapp.com
 
 ```
 git clone https://github.com/jeffersondenilson/viagens.git
-
 cd viagens
 
 # instala dependências do backend
@@ -25,7 +24,7 @@ cd client
 npm install
 ```
 
-Preencher as variáveis de ambiente em [.env.example](.env.example) e [client/.env.local.example](client/.env.local.example) para desenvolvimento.
+Criar os arquivos `.env` (ver [.env.example](.env.example)) e `client/.env.local` (ver [client/.env.local.example](client/.env.local.example))
 
 ## Uso
 
