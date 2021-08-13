@@ -39,35 +39,6 @@ export default function Navbar() {
         id="navbar"
         className={`navbar-menu ${isMenuOpen ? "is-active" : ""}`}
       >
-        {/*<div className="navbar-start" onClick={() => setIsMenuOpen(false)}>
-          <Link className="navbar-item" to="/dashboard">
-            Início
-          </Link>
-
-          <Link className="navbar-item" to="/search/schools">
-            Escolas
-          </Link>
-
-          <Link className="navbar-item" to="/search/classrooms">
-            Turmas
-          </Link>
-
-          <Link className="navbar-item" to="/search/subjects">
-            Disciplinas
-          </Link>
-
-          <Link className="navbar-item" to="/search/abilities">
-            Habilidades
-          </Link>
-
-          <Link className="navbar-item" to="/search/achievements">
-            Conquistas
-          </Link>
-
-          <Link className="navbar-item" to="/search/users">
-            Usuários
-          </Link>
-        </div>*/}
         {/* logout button */}
         <div className="navbar-end">
           <div className="navbar-item">

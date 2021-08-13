@@ -13,7 +13,6 @@ export default function Home() {
     if (user) {
       const { from } = location.state || { from: { pathname: "/destinos" } };
       history.push(from);
-      // history.push("/destinos");
     }
   }, [history, user, location.state]);
 
